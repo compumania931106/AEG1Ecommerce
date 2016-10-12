@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -48,10 +49,10 @@ public class Salesline implements Serializable {
     @Column(name = "purchprice")
     private Double purchprice;
     @JoinColumn(name = "productid", referencedColumnName = "productid")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Product productid;
     @JoinColumn(name = "saleid", referencedColumnName = "saleid")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Sale saleid;
 
     public Salesline() {

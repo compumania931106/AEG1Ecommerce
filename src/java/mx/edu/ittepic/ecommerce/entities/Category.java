@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,7 +45,7 @@ public class Category implements Serializable {
     @Size(max = 50)
     @Column(name = "categoryname")
     private String categoryname;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryid", fetch = FetchType.LAZY)
     private List<Product> productList;
 
     public Category() {

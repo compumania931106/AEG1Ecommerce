@@ -19,12 +19,12 @@ import mx.edu.ittepic.ecommerce.ejbs.EjbEcommerce;
  *
  * @author VictorManuel
  */
-@WebServlet(name = "NewProduct", urlPatterns = {"/NewProduct"})
-public class NewProduct extends HttpServlet {
-
+@WebServlet(name = "UpdateProduct", urlPatterns = {"/UpdateProduct"})
+public class UpdateProduct extends HttpServlet {
+    
     @EJB
     private EjbEcommerce ejb;
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,10 +42,10 @@ public class NewProduct extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet NewProduct</title>");            
+            out.println("<title>Servlet UpdateProduct</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet NewProduct at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateProduct at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -78,22 +78,13 @@ public class NewProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
-        response.setHeader("Cache-control", "no-store");
+        response.setHeader("Cache-Control", "no-store");
+        PrintWriter out = response.getWriter();
         
-        PrintWriter p = response.getWriter();
-        
-        String code = request.getParameter("code");
+        String productid = request.getParameter("productid");
         String productname = request.getParameter("productname");
-        String brand = request.getParameter("brand");
-        String purchprice = request.getParameter("purchprice");
-        String stock = request.getParameter("stock");
-        String salepricemin = request.getParameter("salepricemin");
-        String reorderpoint = request.getParameter("reorderpoint");
-        String currency = request.getParameter("currency");
-        String salepricemay = request.getParameter("salepricemay");
-        String cat = request.getParameter("cat");
         
-        p.println(ejb.newProduct(code, productname, brand, purchprice, stock, salepricemin, reorderpoint, currency, salepricemay, cat));
+        out.println(ejb.updateProductOnlyName(productid, productname));
     }
 
     /**

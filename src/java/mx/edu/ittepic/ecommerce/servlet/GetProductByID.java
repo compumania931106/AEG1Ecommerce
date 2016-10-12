@@ -19,12 +19,11 @@ import mx.edu.ittepic.ecommerce.ejbs.EjbEcommerce;
  *
  * @author VictorManuel
  */
-@WebServlet(name = "NewProduct", urlPatterns = {"/NewProduct"})
-public class NewProduct extends HttpServlet {
-
+@WebServlet(name = "GetProductByID", urlPatterns = {"/GetProductByID"})
+public class GetProductByID extends HttpServlet {
     @EJB
     private EjbEcommerce ejb;
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,19 +35,7 @@ public class NewProduct extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet NewProduct</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet NewProduct at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,7 +50,13 @@ public class NewProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("application/json;charset=UTF-8");
+        response.setHeader("Cache-Control", "no-store");
+        PrintWriter out = response.getWriter();
+        
+        String productid = request.getParameter("productid");
+        
+        out.println(ejb.getProductByID(productid));
     }
 
     /**
@@ -77,23 +70,7 @@ public class NewProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json;charset=UTF-8");
-        response.setHeader("Cache-control", "no-store");
-        
-        PrintWriter p = response.getWriter();
-        
-        String code = request.getParameter("code");
-        String productname = request.getParameter("productname");
-        String brand = request.getParameter("brand");
-        String purchprice = request.getParameter("purchprice");
-        String stock = request.getParameter("stock");
-        String salepricemin = request.getParameter("salepricemin");
-        String reorderpoint = request.getParameter("reorderpoint");
-        String currency = request.getParameter("currency");
-        String salepricemay = request.getParameter("salepricemay");
-        String cat = request.getParameter("cat");
-        
-        p.println(ejb.newProduct(code, productname, brand, purchprice, stock, salepricemin, reorderpoint, currency, salepricemay, cat));
+        processRequest(request, response);
     }
 
     /**

@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,7 +44,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Product.findBySalepricemin", query = "SELECT p FROM Product p WHERE p.salepricemin = :salepricemin"),
     @NamedQuery(name = "Product.findByReorderpoint", query = "SELECT p FROM Product p WHERE p.reorderpoint = :reorderpoint"),
     @NamedQuery(name = "Product.findByCurrency", query = "SELECT p FROM Product p WHERE p.currency = :currency"),
-    @NamedQuery(name = "Product.findBySalepricemay", query = "SELECT p FROM Product p WHERE p.salepricemay = :salepricemay")})
+    @NamedQuery(name = "Product.findBySalepricemay", query = "SELECT p FROM Product p WHERE p.salepricemay = :salepricemay"),
+    @NamedQuery(name = "Product.updateProduct", query = "UPDATE Product p SET p.productname = :productname WHERE p.productid = :productid"),
+    @NamedQuery(name = "Product.findMinimalProducts", query = "SELECT p FROM Product p WHERE p.stock <= p.reorderpoint"),
+    @NamedQuery(name = "Product.deleteProduct", query = "DELETE FROM Product p WHERE p.productid = :productid")})
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -83,10 +87,10 @@ public class Product implements Serializable {
     @NotNull
     @Column(name = "salepricemay")
     private double salepricemay;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productid", fetch = FetchType.LAZY)
     private List<Salesline> saleslineList;
     @JoinColumn(name = "categoryid", referencedColumnName = "categoryid")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Category categoryid;
 
     public Product() {

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="js/plugins/jquery-3.1.0.min.js"></script>
+        <script type="text/javascript" src="js/plugins/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="js/plugins/additional-methods.min.js"></script>
+        <script type="text/javascript" src="js/plugins/jquery.growl.js"></script>
+        <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="js/roles.js"></script>
+        <script type="text/javascript" src="//cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js"></script>
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/jquery.growl.css">
+        <link rel="stylesheet" href="css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="//cdn.datatables.net/responsive/2.1.0/jcss/responsive.dataTables.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <form id="frmRole" method="POST">
+                    <div class="form-group">
+                        <label class="control-label" for="rolename">Rol:</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-user"></i>
+                            </span>
+                            <input class="form-control" type="text" id="rolename" name="rolename" placeholder="Ingrese el nombre del rol">
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-block btn-primary btn-lg"><i class="glyphicon glyphicon-save"></i>Guardar</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <table id="tbRoles">
+                    <thead>
+                        <tr>
+                            <th>Clave</th>
+                            <th>Rol</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            
+        </div>
+
+    </body>
+</html>
