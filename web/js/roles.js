@@ -57,10 +57,38 @@ $(function(){
            },
            {
                data: "rolename"
+           },
+           {
+               data: function(row){
+                   console.log(row);
+                   str = "<button id='btnBorrar' class = 'btn btn-danger btn-xs' onClick = 'deleteRole("+row['roleid']+")'>Borar</button>";
+                   return str;
+               }
            }
        ]
    });
 });
+
+function deleteRole(idRole){
+    $.ajax({
+       url: "DeleteRole",
+       type: "post",
+       data: {roleid : idRole}
+    }).done(
+        function(data){
+            if(data.code === 200){
+                $.growl.notice({message: data.msg});
+                $('#tbRoles').dataTable().api().ajax.reload();
+            }else{
+                $.growl.error({ message: data.msg });
+            }
+        }
+    ).fail(
+        function(){
+            $.growl.error({ message: "No hay mensaje que mostrar" });
+        }
+    );
+}
 
 function newRole(){
     $.ajax({
@@ -71,6 +99,8 @@ function newRole(){
         function(data){
             if(data.code === 200){
                 $.growl.notice({ message: data.msg });
+                $('#tbRoles').dataTable().api().ajax.reload();
+                $('#rolename').val('');
             }
             else{
                 $.growl.error({ message: data.msg });
