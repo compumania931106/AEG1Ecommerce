@@ -55,6 +55,10 @@ public class EjbEcommerce {
         roles = roles.substring(0, roles.length()-1);
         roles = roles + "]";
         
+        /*for(int i = 0; i < listRoles.size(); i++){
+            listRoles.get(i).setUsersList(null);
+        }*/
+        
         m.setCode(200);
         m.setMsg(roles);
         m.setDetail("OK");
