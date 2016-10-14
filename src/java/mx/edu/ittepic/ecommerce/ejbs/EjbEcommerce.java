@@ -73,11 +73,11 @@ public class EjbEcommerce {
         Gson gson = builder.create();
         
         try{
-                /*Query q = entity.createNamedQuery("Role.updateRole").
+                Query q = entity.createNamedQuery("Role.updateRole").
                 setParameter("rolename", name).
-                setParameter("roleid", Integer.parseInt(rolid));*/
+                setParameter("roleid", Integer.parseInt(rolid));
                 
-                Query q = entity.createNativeQuery("UPDATE Role SET rolename = '"+ name +"' WHERE roleid = "+ rolid +";");
+                //Query q = entity.createNativeQuery("UPDATE Role SET rolename = '"+ name +"' WHERE roleid = "+ rolid +";");
                 
             if(q.executeUpdate() == 1){
                 m.setCode(200);
