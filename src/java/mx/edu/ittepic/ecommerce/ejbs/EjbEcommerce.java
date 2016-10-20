@@ -21,6 +21,7 @@ import javax.persistence.TransactionRequiredException;
 import mx.edu.ittepic.ecommerce.entities.Category;
 import mx.edu.ittepic.ecommerce.entities.Product;
 import mx.edu.ittepic.ecommerce.entities.Role;
+import mx.edu.ittepic.ecommerce.entities.Users;
 import mx.edu.ittepic.ecommerce.utils.Message;
 
 /**
@@ -35,6 +36,30 @@ public class EjbEcommerce {
     
     @PersistenceContext
     EntityManager entity;
+    
+    
+    public String getUser(String username, String password){
+        Message m = new Message();
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        
+        try{
+            Users users;
+            Query q = entity.createNamedQuery("Users.getUser").setParameter("username", username).setParameter("password", password);
+        
+            users = (Users) q.getSingleResult();
+         
+                m.setCode(200);
+                m.setMsg("Tiene acceso al sistema");
+                m.setDetail("OK");
+         
+        }catch(NoResultException e){
+            m.setCode(401);
+            m.setMsg("No tiene acceso al sistema");
+            m.setDetail(e.toString());
+        }
+        return gson.toJson(m);
+    }
     
     public String getRoles(){
         List<Role> listRoles;

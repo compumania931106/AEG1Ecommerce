@@ -92,7 +92,12 @@ $(function(){
        },
        columns:[
            {
-               data: "roleid"
+               data: function(row){
+                   str = "<div align='right'>";
+                   str+= "$ "+row['roleid']+".00";
+                   str+= "</div>";
+                   return str;
+               }
            },
            {
                data: "rolename"
@@ -100,12 +105,18 @@ $(function(){
            {
                data: function(row){
                    console.log(row);
-                   str = "<button id='btnBorrar' class = 'btn btn-danger btn-xs' onClick = 'deleteRole("+row['roleid']+")'>Borar</button>";
+                   str = "<div align='center'>";
+                   str+= "<button id='btnBorrar' class = 'btn btn-danger btn-xs' onClick = 'deleteRole("+row['roleid']+")'>Borar</button>";
                    str+= "&nbsp;<button id='btnEditar' class = 'btn btn-success btn-xs' onClick = 'showRole("+row['roleid']+",\""+row['rolename']+"\")'>Modificar</button>";
+                   str+= "</div>";
                    return str;
                }
            }
        ]
+   });
+   
+   $("#btnModificar").on('click', function(){
+       $("#frmEditRole").submit();
    });
 });
 

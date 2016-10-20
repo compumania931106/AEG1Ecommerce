@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="js/plugins/jquery-3.1.0.min.js"></script>
+        <script type="text/javascript" src="js/plugins/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="js/plugins/additional-methods.min.js"></script>
+        <script type="text/javascript" src="js/plugins/jquery.growl.js"></script>
+        <script type="text/javascript" src="js/login.js"></script>
+        
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/jquery.growl.css">
+    </head>
+    <body>
+        <div class="container col-md-6 col-md-offset-3">
+                <form id="frmLogin" method="POST">
+                    <div class="form-group">
+                        <label class="control-label" for="username">Usuario:</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-user"></i>
+                            </span>
+                            <input class="form-control" type="text" id="username" name="username" placeholder="Ingrese su nombre de usuario.">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="password">Contraseña:</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-user"></i>
+                            </span>
+                            <input class="form-control" type="password" id="password" name="password" placeholder="Ingrese su contraseña.">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <button type="submit" class="btn btn-block btn-primary btn-lg"><i class="glyphicon glyphicon-save"></i>Entrar</button>
+                    </div>
+                </form>
+            </div>
+    </body>
+</html>
