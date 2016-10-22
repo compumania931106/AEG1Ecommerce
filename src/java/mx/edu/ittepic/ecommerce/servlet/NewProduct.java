@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mx.edu.ittepic.ecommerce.ejbs.EjbEcommerce;
+import mx.edu.ittepic.ecommerce.ejbs.EjbProducts;
 
 /**
  *
@@ -23,7 +23,7 @@ import mx.edu.ittepic.ecommerce.ejbs.EjbEcommerce;
 public class NewProduct extends HttpServlet {
 
     @EJB
-    private EjbEcommerce ejb;
+    private EjbProducts ejb;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

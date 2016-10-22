@@ -4,8 +4,25 @@
  * and open the template in the editor.
  */
 
-$(function(){
-   //$('#tbRoles').dataTable().api().ajax.reload();
+
+
+$(function(){  
+   $('#mRoles').trigger('click');
+    
+    
+   $.ajax({
+        url: 'GetRoles',
+        type: 'GET',
+        dataType: 'json'
+    }).done(function (json){
+        console.log("Codigo json: "+json.code);
+        if(json.code===200)
+        $.each($.parseJSON(json.msg), function(i,row){
+            console.log(row.rolename);
+           $('<option></option>', {text: row.rolename}).attr('value',row.roleid).appendTo('#cbRoles'); 
+        });
+    });
+   
    $('#frmRole').validate({
        rules:{
            rolename:{
@@ -78,42 +95,42 @@ $(function(){
        }
    });
    
-   
    $('#tbRoles').DataTable({
-       language: {
-           url: "//cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json"
-       },
-       ajax:{
-           url: "GetRoles",
-           dataSrc: function(json){
-               //console.log("Resultado: "+ json['msg']);
-               return $.parseJSON(json['msg']);
-           }
-       },
-       columns:[
-           {
-               data: function(row){
-                   str = "<div align='right'>";
-                   str+= "$ "+row['roleid']+".00";
-                   str+= "</div>";
-                   return str;
-               }
-           },
-           {
-               data: "rolename"
-           },
-           {
-               data: function(row){
-                   console.log(row);
-                   str = "<div align='center'>";
-                   str+= "<button id='btnBorrar' class = 'btn btn-danger btn-xs' onClick = 'deleteRole("+row['roleid']+")'>Borar</button>";
-                   str+= "&nbsp;<button id='btnEditar' class = 'btn btn-success btn-xs' onClick = 'showRole("+row['roleid']+",\""+row['rolename']+"\")'>Modificar</button>";
-                   str+= "</div>";
-                   return str;
-               }
-           }
-       ]
-   });
+        language:{
+            url:"http://cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json"
+        },
+        ajax:{
+          url:"GetRoles"  ,
+          dataSrc:function(json){
+              
+              return $.parseJSON(json['msg']);
+          }
+        },
+        columns:[
+            {
+                data:function(row){
+                str="<div align='right'>";
+                str+= accounting.formatMoney( row["roleid"] );
+                str+="</div>";
+                return str;
+                }
+            },
+            {
+             data:"rolename"   
+            },
+            {
+              data: function(row){
+                  str="<div align='center'>";
+                  str+="<button id='btnBorrar' class='btn btn-danger btn-xs' onclick='deleteRole("+row["roleid"]+")'><i class='glyphicon glyphicon-trash'></i></button>";
+                  str+= "&nbsp;<button id='btnEditar' class = 'btn btn-success btn-xs' onClick = 'showRole("+row['roleid']+",\""+row['rolename']+"\")'><i class='glyphicon glyphicon-edit'></i></button>";
+                  str+="<div>";
+                  return str;
+              }  
+            }
+        ]
+            
+        
+    });
    
    $("#btnModificar").on('click', function(){
        $("#frmEditRole").submit();
@@ -150,25 +167,42 @@ function updateRole(){
     );
 }
 
-function deleteRole(idRole){
-    $.ajax({
-       url: "DeleteRole",
-       type: "post",
-       data: {roleid : idRole}
-    }).done(
-        function(data){
-            if(data.code === 200){
-                $.growl.notice({message: data.msg});
-                $('#tbRoles').dataTable().api().ajax.reload();
-            }else{
-                $.growl.error({ message: data.msg });
+function deleteRole(id){
+    swal({title: "¿Estás seguro que deseas eliminar?",
+        text: "No podrás recuperar la información después de borrarla.",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Sí, eliminar",
+        closeOnConfirm: false},
+            function () {
+                $.ajax(
+                        {
+                            url: "DeleteRole",
+                            type: "post",
+                            data: {roleid: id}
+                        }
+                ).done(
+                        function (data) {
+                            if (data.code === 200) {
+                                //$.growl.notice({title: "Successful", message: data.msg });
+                                swal("Eliminado", data.msg, "success");
+                                $('#tbRoles').dataTable().api().ajax.reload();
+                                $('#rolename').val('');
+                            } else {
+                                $.growl.error({message: data.msg});
+                            }
+                        }
+                ).fail(
+                        function (data) {
+                            //$.growl.notice({message: "Algo va mal"});
+                            swal({title: "Error", text: "Algo va mal, no se pudo eliminar", type: "error", confirmButtonText: "Cerrar"});
+                        }
+                );    
+                
             }
-        }
-    ).fail(
-        function(){
-            $.growl.error({ message: "No hay mensaje que mostrar" });
-        }
     );
+    
 }
 
 function newRole(){
