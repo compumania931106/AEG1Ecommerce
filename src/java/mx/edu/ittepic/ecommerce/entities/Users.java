@@ -51,7 +51,12 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Users.findByPhoto", query = "SELECT u FROM Users u WHERE u.photo = :photo"),
     @NamedQuery(name = "Users.findByCellphone", query = "SELECT u FROM Users u WHERE u.cellphone = :cellphone"),
     @NamedQuery(name = "Users.findByGender", query = "SELECT u FROM Users u WHERE u.gender = :gender"),
-    @NamedQuery(name = "Users.getUser", query = "SELECT u FROM Users u WHERE u.username = :username AND u.password = :password")})
+    @NamedQuery(name = "Users.getUser", query = "SELECT u FROM Users u WHERE u.username = :username AND u.password = :password"),
+    @NamedQuery(name = "Users.updateUser", query = "UPDATE Users u SET u.username = :username, u.password = :password, u.phone = :phone,"
+            + "u.neigborhood = :neigborhood, u.zipcode = :zipcode, u.city = :city, u.country = :country, u.state = :state, u.region = :region,"
+            + "u.street = :street, u.email = :email, u.streetnumber = :streetnumber, u.photo = :photo, u.cellphone = :cellphone, u.companyid = :companyid,"
+            + "u.roleid = :roleid, u.gender = :gender WHERE u.userid = :userid"),
+    @NamedQuery(name = "Users.deleteUser", query = "DELETE FROM Users u WHERE u.userid = :userid")})
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
