@@ -44,7 +44,12 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Company.findByStreetnumber", query = "SELECT c FROM Company c WHERE c.streetnumber = :streetnumber"),
     @NamedQuery(name = "Company.findByPhone", query = "SELECT c FROM Company c WHERE c.phone = :phone"),
     @NamedQuery(name = "Company.findByRfc", query = "SELECT c FROM Company c WHERE c.rfc = :rfc"),
-    @NamedQuery(name = "Company.findByLogo", query = "SELECT c FROM Company c WHERE c.logo = :logo")})
+    @NamedQuery(name = "Company.findByLogo", query = "SELECT c FROM Company c WHERE c.logo = :logo"),
+    @NamedQuery(name = "Company.updateCompany", query = "UPDATE Company c SET c.companyname = :companyname,"
+            + "c.neighborhood = :neighborhood, c.zipcode = :zipcode, c.city = :city, c.country = :country, c.state = :state,"
+            + "c.region = :region, c.street = :street, c.streetnumber = :streetnumber, c.phone = :phone, c.rfc = :rfc,"
+            + "c.logo = :logo WHERE c.companyid = :companyid"),
+    @NamedQuery(name = "Company.deleteByID", query = "DELETE FROM Company c WHERE c.companyid = :companyid"),})
 public class Company implements Serializable {
 
     private static final long serialVersionUID = 1L;
