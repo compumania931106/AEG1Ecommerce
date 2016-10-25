@@ -158,16 +158,31 @@ public class EjbProducts {
         return gson.toJson(m);
     }
 
-    public String updateProductOnlyName(String productid, String productname) {
+    public String UpdateProduct(String productid, String code, String productname, String brand,
+            String purchprice, String stock, String salepricemin,
+            String reorderpoint, String currency, String salepricemay,
+            String categoryid){
+        
         Message m = new Message();
-        Product r = new Product();
+        Product p = new Product();
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
-
+        
+        Category cat = entity.find(Category.class, Integer.parseInt(categoryid));
+        
         try {
             Query q = entity.createNamedQuery("Product.updateProduct").
+                    setParameter("productid", Integer.parseInt(productid)).
+                    setParameter("code", code).
                     setParameter("productname", productname).
-                    setParameter("productid", Integer.parseInt(productid));
+                    setParameter("brand", brand).
+                    setParameter("purchprice", Double.parseDouble(purchprice)).
+                    setParameter("stock", Integer.parseInt(stock)).
+                    setParameter("salepricemin", Double.parseDouble(salepricemin)).
+                    setParameter("reorderpoint", Integer.parseInt(reorderpoint)).
+                    setParameter("currency", currency).
+                    setParameter("salepricemay", Double.parseDouble(salepricemay)).
+                    setParameter("categoryid", cat);
 
             if (q.executeUpdate() == 1) {
                 m.setCode(200);

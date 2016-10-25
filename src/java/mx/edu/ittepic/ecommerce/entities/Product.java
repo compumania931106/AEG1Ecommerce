@@ -45,7 +45,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Product.findByReorderpoint", query = "SELECT p FROM Product p WHERE p.reorderpoint = :reorderpoint"),
     @NamedQuery(name = "Product.findByCurrency", query = "SELECT p FROM Product p WHERE p.currency = :currency"),
     @NamedQuery(name = "Product.findBySalepricemay", query = "SELECT p FROM Product p WHERE p.salepricemay = :salepricemay"),
-    @NamedQuery(name = "Product.updateProduct", query = "UPDATE Product p SET p.productname = :productname WHERE p.productid = :productid"),
+    @NamedQuery(name = "Product.updateProduct", query = "UPDATE Product p SET p.productname = :productname, p.code = :code,"
+            + "p.brand = :brand, p.purchprice = :purchprice, p.stock = :stock, p.salepricemin = :salepricemin, p.reorderpoint = :reorderpoint,"
+            + "p.currency = :currency, p.categoryid = :categoryid, p.salepricemay = :salepricemay WHERE p.productid = :productid"),
     @NamedQuery(name = "Product.findMinimalProducts", query = "SELECT p FROM Product p WHERE p.stock <= p.reorderpoint"),
     @NamedQuery(name = "Product.deleteProduct", query = "DELETE FROM Product p WHERE p.productid = :productid")})
 public class Product implements Serializable {

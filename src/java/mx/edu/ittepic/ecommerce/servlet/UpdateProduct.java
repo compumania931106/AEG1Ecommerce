@@ -80,12 +80,22 @@ public class UpdateProduct extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
         response.setHeader("Cache-Control", "no-store");
-        PrintWriter out = response.getWriter();
+        PrintWriter p = response.getWriter();
+
         
         String productid = request.getParameter("productid");
+        String code = request.getParameter("code");
+        String currency = request.getParameter("currency");
         String productname = request.getParameter("productname");
+        String brand = request.getParameter("brand");
+        String cat = request.getParameter("cat");
+        String purchprice = request.getParameter("purchprice");
+        String reorderpoint = request.getParameter("reorderpoint");
+        String salepricemay = request.getParameter("salepricemay");
+        String salepricemin = request.getParameter("salepricemin");
+        String stock = request.getParameter("stock");
         
-        out.println(ejb.updateProductOnlyName(productid, productname));
+        p.println(ejb.UpdateProduct(productid, code, productname, brand, purchprice, stock, salepricemin, reorderpoint, currency, salepricemay, cat));
     }
 
     /**
