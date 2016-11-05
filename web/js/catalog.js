@@ -23,11 +23,18 @@ function addProduct(code, name){
     $.ajax({
         url: 'AddProduct',
         type: 'get',
+        dataType: 'json',
         data: {code: code,
                productname: name,
                quantity: 1,
                salepricemay: 10}
     }).done(function (json){
-        
+        if(json.code===200){
+            $('#items').empty();
+            $.each($.parseJSON(json.msg), function(i,row){
+                console.log(row.quantity);
+                $('#items').append("<li><span class='cd-qty'>"+ row.quantity +"x</span> "+ row.productname +"<div class='cd-price'>$"+ row.salepricemay +"</div><a href='#0' class='cd-item-remove cd-img-replace'>Remove</a></li>");
+            });
+        }
     })
 }

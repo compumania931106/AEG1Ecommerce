@@ -14,6 +14,7 @@ import javax.ejb.Remote;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import mx.edu.ittepic.ecommerce.entities.ProductCart;
+import mx.edu.ittepic.ecommerce.utils.Message;
 
 /**
  *
@@ -35,6 +36,7 @@ public class EjbCartBean implements EjbCartBeanRemote {
         p.setQuantity(quantity);
         p.setSalepricemay(salepricemay);
         p.setImage(image);*/
+        Message m = new Message();
         boolean var = false;
         for (int i = 0; i < cart.size(); i++) {
             if (cart.get(i).getCode().equals(code)) {
@@ -54,7 +56,10 @@ public class EjbCartBean implements EjbCartBeanRemote {
         } else {
             cart.get(indexrepetido).setQuantity(cart.get(indexrepetido).getQuantity()+ quantity);
         }
-        return new GsonBuilder().create().toJson(cart);
+        m.setCode(200);
+        m.setMsg(new GsonBuilder().create().toJson(cart));
+        m.setDetail("OK");
+        return new GsonBuilder().create().toJson(m);
 
     }
 
