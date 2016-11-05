@@ -28,7 +28,7 @@ public class EjbCartBean implements EjbCartBeanRemote {
     int indexrepetido = -1;
 
     @Override
-    public String addProduct(String code, String productname, int quantity, Double salepricemay, String image) {
+    public String addProduct(String code, String productname, int quantity, Double salepricemay) {
 
         /*p.setCode(code);
         p.setProductname(productname);
@@ -49,7 +49,7 @@ public class EjbCartBean implements EjbCartBeanRemote {
             p.setProductname(productname);
             p.setQuantity(quantity);
             p.setSalepricemay(salepricemay);
-            p.setImage(image);
+            
             cart.add(p);
         } else {
             cart.get(indexrepetido).setQuantity(cart.get(indexrepetido).getQuantity()+ quantity);

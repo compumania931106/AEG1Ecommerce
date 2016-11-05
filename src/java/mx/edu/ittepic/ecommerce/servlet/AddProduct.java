@@ -44,7 +44,7 @@ public class AddProduct extends HttpServlet {
         String productname = request.getParameter("productname");
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         Double salepricemay = Double.parseDouble(request.getParameter("salepricemay"));
-        String image = request.getParameter("image");
+        
         
         EjbCartBeanRemote cart = (EjbCartBeanRemote) request.getSession().getAttribute("ejbsession");
         
@@ -55,12 +55,12 @@ public class AddProduct extends HttpServlet {
                 cart = (EjbCartBeanRemote) ic.lookup("java:comp/env/ejb/EjbCartBean");
                 request.getSession().setAttribute("ejbsession", cart);
 
-                out.print(cart.addProduct(code, productname, quantity, salepricemay, image));
+                out.print(cart.addProduct(code, productname, quantity, salepricemay));
             } catch (NamingException ex) {
                 Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            out.print(cart.addProduct(code, productname, quantity, salepricemay, image));
+            out.print(cart.addProduct(code, productname, quantity, salepricemay));
         }
      
     }

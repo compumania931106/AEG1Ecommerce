@@ -14,7 +14,7 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface EjbCartBeanRemote {
-    public String addProduct(String code, String productname, int quantity, Double salepricemay, String image);
+    public String addProduct(String code, String productname, int quantity, Double salepricemay);
     public String removeProduct(int productid);
     public void remove();
     public void initialize();

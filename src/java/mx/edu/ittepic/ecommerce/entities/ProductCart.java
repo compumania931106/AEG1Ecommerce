@@ -14,7 +14,7 @@ public class ProductCart {
     private String productname;
     private int quantity;
     private Double salepricemay;
-    private String image;
+    
 
     public String getCode() {
         return code;
@@ -48,13 +48,7 @@ public class ProductCart {
         this.salepricemay = salepricemay;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
+    
     
     
 }
