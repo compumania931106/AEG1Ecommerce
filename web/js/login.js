@@ -55,7 +55,7 @@ $(function(){
     }).done(
         function(data){
             if(data.code === 200){
-                var url = "index.html"; 
+                var url = "roles.html"; 
                 $(location).attr('href',url);
             }
             else{
