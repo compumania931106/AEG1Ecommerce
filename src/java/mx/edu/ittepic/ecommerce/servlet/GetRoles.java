@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mx.edu.ittepic.ecommerce.ejbs.EjbCartBeanRemote;
 import mx.edu.ittepic.ecommerce.ejbs.EjbRoles;
 
 /**
@@ -39,8 +40,16 @@ public class GetRoles extends HttpServlet {
         response.setContentType("application/json;charset=UTF-8");
         response.setHeader("Cache-Control", "no-store");
         PrintWriter out = response.getWriter();
+        EjbCartBeanRemote login = (EjbCartBeanRemote) request.getSession().getAttribute("ejbsession");
         
-        out.println(ejb.getRoles());
+        if(login == null){
+            response.sendRedirect("login.html");
+        }else{
+            out.println(ejb.getRoles());
+        }
+        
+        
+        
         
     }
 

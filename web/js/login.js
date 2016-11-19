@@ -49,8 +49,8 @@ $(function(){
    function login(){
        $.ajax({
         url: "GetUser",
-        type: "post",
-        data: {username : $('#username').val(),
+        type: "get",
+        data: {user : $('#username').val(),
               password : $('#password').val()}
     }).done(
         function(data){

@@ -18,4 +18,7 @@ public interface EjbCartBeanRemote {
     public String removeProduct(int productid);
     public void remove();
     public void initialize();
+    public String login(String user, String password);
+    public int  getUserid();
+    public String getUsername();
 }
